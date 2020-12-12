@@ -11,7 +11,7 @@ export default class Symptoms extends Component {
     }
 
     updateSymp(event) {
-        const inputVal = event.target.value.substr(0, 20)
+        event.target.value.substr(0, 20)
     }
 
     changeSymp(event) {
@@ -32,8 +32,8 @@ export default class Symptoms extends Component {
         this.props.onAddSymp(this.state.mapSymptoms)
     }
 
-    search(key, type) {
-        fetch(`https://api.infermedica.com/v3/search?phrase=${key}` +
+    async search(key, type) {
+        const response = await fetch(`https://api.infermedica.com/v3/search?phrase=${key}` +
         `&sex=male&max_results=5&type=${type}`, {
             method: 'GET',
             headers: settings.headers
@@ -69,10 +69,10 @@ export default class Symptoms extends Component {
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.mapDataToEvidence}>
                 <div className="form-group">
-                    <label>What seems to be the problem?</label>
-                    <input type="text" className="form-control" placeholder="upset stomach" onchange={this.updateSymp}></input>
+                    <label>What seems to be the problem?</label><br />
+                    <input type="text" className="form-control" placeholder="upset stomach" onChange={this.updateSymp}></input>
                 </div>
                 {!this.state.symptoms.length ? (<h5>Which symptoms are applicable to you?</h5>)
                  : (
@@ -80,13 +80,16 @@ export default class Symptoms extends Component {
                         <div className="form-group">
                             {this.state.symptoms.map(symptom => (
                                 <div className="form-check" key={symptom.id}>
-                                    <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label>
+                                    <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label><br/>
                                     <input type="checkbox" id={symptom.id} className="form-check-input" onChange={this.changeSymp}></input>
+                                    <br />
                                 </div>
                             ))}
                         </div>
                     </Fragment>
                 )}
+                <br />
+                <input type="submit" value="submit"/>
             </form>
         )
     }
