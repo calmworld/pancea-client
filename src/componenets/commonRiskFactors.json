@@ -1,0 +1,22 @@
+[
+	{
+		"id": "p_7",
+		"name": "BMI above 30"
+	},
+	{
+		"id": "p_9",
+		"name": "Hypertension"
+	},
+	{
+		"id": "p_10",
+		"name": "High cholesterol"
+	},
+	{
+		"id": "p_28",
+		"name": "Smoking"
+	},
+	{
+		"id": "p_147",
+		"name": "Physical injury"
+	}
+]
