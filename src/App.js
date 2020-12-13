@@ -6,6 +6,7 @@ import Header from './componenets/Header'
 import reducer from './reducers'
 import Home from './componenets/Home'
 import Symptoms from './componenets/Symptoms'
+import Welcome from './componenets/Welcome'
 
 const App = () => {
   const store = createStore(reducer)
@@ -16,7 +17,8 @@ const App = () => {
           <Header />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={Welcome} />
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/symptoms" component={Symptoms}/>
               </Switch>
             </div>
