@@ -24,9 +24,7 @@ export default class Welcome extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.setState({
-            redirect: true
-        })
+        this.setState({ redirect: true})
     }
 
 
@@ -57,7 +55,9 @@ export default class Welcome extends Component {
                             />
                         </label>
                         <br />
+                        {this.state.agree ? 
                         <button type="submit" value="submit">Continue</button>
+                        : ""}
                     </form>
                 </div>
             </div>
