@@ -25,6 +25,6 @@ code {
   width: 150px;
 }
 
-.container {
+.container, .symp-container {
   text-align: center;
 }

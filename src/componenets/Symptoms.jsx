@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 import settings from '../settings.json'
 
-export default class Symptoms extends Component {
+const TYPE = 'symptom';
+const REQUEST_TIMEOUT = 500;
+var timer = null;
+
+class Symptoms extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -10,11 +15,17 @@ export default class Symptoms extends Component {
         }
     }
 
-    updateSymp(event) {
-        event.target.value.substr(0, 20)
+    updateSymp = event => {
+        let inputVal = event.target.value.substr(0, 20)
+
+        clearTimeout(timer)
+
+        timer = setTimeout(() => {
+            this.search(inputVal, TYPE)
+        }, REQUEST_TIMEOUT)
     }
 
-    changeSymp(event) {
+    changeSymp = event => {
         const {checked, id} = event.target;
         const choiceId = checked ? 'present' : 'absent';
         this.setState({
@@ -27,13 +38,8 @@ export default class Symptoms extends Component {
         })
     }
 
-    componenetDidMount() {
-        this.search()
-        this.props.onAddSymp(this.state.mapSymptoms)
-    }
-
-    async search(key, type) {
-        const response = await fetch(`https://api.infermedica.com/v3/search?phrase=${key}` +
+    search = async (key, type) => {
+        const response = await fetch(`https://api.infermedica.com/v2/search?phrase=${key}` +
         `&sex=male&max_results=5&type=${type}`, {
             method: 'GET',
             headers: settings.headers
@@ -53,44 +59,50 @@ export default class Symptoms extends Component {
         });
     }
 
-    dispatchElement(dispatch) {
-        return {
-            onAddSymp: symptoms => {
-                dispatch({type: 'ADD_SYMPTOMS', payload: symptoms})
-            }
-        }
-    }
 
-    mapStateToProps(state) {
-        return {
-            store: state
-        }
+    componenetDidMount() {
+        this.props.onAddSymp(this.state.mapSymptoms)
     }
 
     render() {
         return (
-            <form onSubmit={this.mapDataToEvidence}>
-                <div className="form-group">
-                    <label>What seems to be the problem?</label><br />
-                    <input type="text" className="form-control" placeholder="upset stomach" onChange={this.updateSymp}></input>
+            <div className="symp-container">
+                <div className="form-group row">
+                    <label htmlfor="colFormLabel" className="col-form-label">What seems to be the problem?</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="colFormLabel" placeholder="upset stomach" onChange={this.updateSymp}></input>
+                    </div>
                 </div>
-                {!this.state.symptoms.length ? (<h5>Which symptoms are applicable to you?</h5>)
-                 : (
+                {!this.state.symptoms.length ? (<h5>Don't wory about correct medical terms</h5>)
+                : (
                     <Fragment>
                         <div className="form-group">
                             {this.state.symptoms.map(symptom => (
                                 <div className="form-check" key={symptom.id}>
                                     <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label><br/>
                                     <input type="checkbox" id={symptom.id} className="form-check-input" onChange={this.changeSymp}></input>
-                                    <br />
                                 </div>
                             ))}
                         </div>
                     </Fragment>
                 )}
-                <br />
-                <input type="submit" value="submit"/>
-            </form>
+            </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        store: state
+    }
+}
+
+const dispatchElement = dispatch => {
+    return {
+        onAddSymp: symptoms => {
+            dispatch({type: 'ADD_SYMPTOMS', payload: symptoms})
+        }
+    }
+}
+
+export default connect(mapStateToProps, dispatchElement)(Symptoms);
