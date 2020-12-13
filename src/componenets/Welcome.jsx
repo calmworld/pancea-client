@@ -55,6 +55,7 @@ export default class Welcome extends Component {
                             />
                         </label>
                         <br />
+                        <br />
                         {this.state.agree ? 
                         <button type="submit" value="submit">Continue</button>
                         : ""}
