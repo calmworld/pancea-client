@@ -8,7 +8,7 @@ export default class Home extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h2>Hello! I am Panacea</h2>
+                        <h2>Hello! I am Pancea</h2>
                         <p className="lead">I can help you find a diagnosis and connect you to a specialist</p>
                         <button>
                             <Link className="link link-lg" to={`/symptoms`}>Evaluate My Symptoms</Link>

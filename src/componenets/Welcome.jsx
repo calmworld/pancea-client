@@ -41,7 +41,7 @@ export default class Welcome extends Component {
                     </h3>
                     <h4>1. Content.</h4>
                     <p>
-                        Panacea will use reasonable efforts to include accurate and up-to-date information on this Web site but makes no warranties or representations of any kind as to its accuracy, currency or completeness. You agree that access to and use of this Web site and the content thereof is at your own risk. Panacea disclaims all warranties, express or implied, including warranties of merchantability or fitness for a particular purpose. Neither Panacea nor any party involved in creating, producing or delivering this Web site shall be liable for any damages, including without limitation, direct, incidental, consequential, indirect or punitive damages, arising out of access to, use of or inability to use this Web site, or any errors or omissions in the content thereof. This limitation includes damages to, or for any viruses that infect, your computer equipment.
+                        Pancea will use reasonable efforts to include accurate and up-to-date information on this Web site but makes no warranties or representations of any kind as to its accuracy, currency or completeness. You agree that access to and use of this Web site and the content thereof is at your own risk. Pancea disclaims all warranties, express or implied, including warranties of merchantability or fitness for a particular purpose. Neither Pancea nor any party involved in creating, producing or delivering this Web site shall be liable for any damages, including without limitation, direct, incidental, consequential, indirect or punitive damages, arising out of access to, use of or inability to use this Web site, or any errors or omissions in the content thereof. This limitation includes damages to, or for any viruses that infect, your computer equipment.
                     </p>
                     <h4>2. Medical Information.</h4>
                     <p>
@@ -54,7 +54,7 @@ export default class Welcome extends Component {
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <label>
-                            I Agree to Panacea Terms of Service.
+                            I Agree to Pancea Terms of Service.
                             <input 
                             name="agree" 
                             type="checkbox" 

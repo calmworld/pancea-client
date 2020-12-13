@@ -73,7 +73,7 @@ class Symptoms extends Component {
                         <input type="text" className="form-control" id="colFormLabel" placeholder="upset stomach" onChange={this.updateSymp}></input>
                     </div>
                 </div>
-                {!this.state.symptoms.length ? (<h5>Don't wory about correct medical terms</h5>)
+                {!this.state.symptoms.length ? (<h5>P.S. I can understand non-medical terms</h5>)
                 : (
                     <Fragment>
                         <div className="form-group">
