@@ -66,7 +66,7 @@ class Symptoms extends Component {
 
     render() {
         return (
-            <div className="symp-container">
+            <div className="container">
                 <div className="form-group row">
                     <label htmlfor="colFormLabel" className="col-form-label">What seems to be the problem?</label>
                     <div className="col-sm-10">
