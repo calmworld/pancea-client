@@ -79,8 +79,8 @@ class Symptoms extends Component {
                         <div className="form-group">
                             {this.state.symptoms.map(symptom => (
                                 <div className="form-check" key={symptom.id}>
-                                    <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label><br/>
                                     <input type="checkbox" id={symptom.id} className="form-check-input" onChange={this.changeSymp}></input>
+                                    <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label>
                                 </div>
                             ))}
                         </div>
