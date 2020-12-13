@@ -36,12 +36,14 @@ export default class Welcome extends Component {
             <div>
                 <div>
                     <h2>Disclaimer</h2>
-                    <h4>
-                    This tool does not provide medical advice. It is intended for informational purposes only. 
-                    It is not a substitute for professional medical advice, diagnosis or treatment. 
-                    Never ignore professional medical advice in seeking treatment because of something you have read on the Panacea Site. 
-                    If you think you may have a medical emergency, immediately call your doctor or dial 911.
-                    </h4>
+                    <h4>1. Content.</h4>
+                    <p>
+                        Panacea will use reasonable efforts to include accurate and up-to-date information on this Web site but makes no warranties or representations of any kind as to its accuracy, currency or completeness. You agree that access to and use of this Web site and the content thereof is at your own risk. Panacea disclaims all warranties, express or implied, including warranties of merchantability or fitness for a particular purpose. Neither Panacea nor any party involved in creating, producing or delivering this Web site shall be liable for any damages, including without limitation, direct, incidental, consequential, indirect or punitive damages, arising out of access to, use of or inability to use this Web site, or any errors or omissions in the content thereof. This limitation includes damages to, or for any viruses that infect, your computer equipment.
+                    </p>
+                    <h4>2. Medical Information.</h4>
+                    <p>
+                        This Web site may contain general information relating to various medical conditions and their treatment. Such information is provided for informational purposes only and is not meant to be a substitute for advice provided by a doctor or other qualified health care professional. Patients should not use the information contained herein for diagnosing a health or fitness problem or disease. Patients should always consult with a doctor or other health care professional for medical advice or information about diagnosis and treatment.
+                    </p>
                 </div>
                 <div>
                     <form onSubmit={this.handleSubmit}>
