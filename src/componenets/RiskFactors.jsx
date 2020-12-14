@@ -81,7 +81,9 @@ class RiskFactors extends Component {
                                     </div>
                                 ))}
                                 </div>
-                                <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link>
+                                <button>
+                                    <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link>
+                                </button>
                             </Fragment>
                             }
                         </div>

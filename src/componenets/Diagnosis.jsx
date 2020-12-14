@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import settings from '../settings.json'
+import { connect } from 'react-redux'
 
-export default class Diagnosis extends Component {
+const list = localStorage
+
+class Diagnosis extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -9,6 +12,26 @@ export default class Diagnosis extends Component {
             evidence: []
         }
         this.getDiagnosis = this.getDiagnosis.bind(this)
+        this.initializeDiagnosis = this.initializeDiagnosis.bind(this)
+        this.updateDiagnosis = this.updateDiagnosis.bind(this)
+    }
+
+    componentDidMount() {
+        this.initializeDiagnosis()
+    }
+
+    initializeDiagnosis() {
+        let collection = this.props.store.symptomsReducer
+        .concat(this.props.store.riskFactorsReducer)
+        .map(item => {
+            item['initial'] = true
+            return item
+        })
+        if (!collection.length) {
+            collection = JSON.parse(list.getItem('collection'))
+        } else {
+            list.setItem('collection', JSON.stringify(collection))
+        }
     }
 
     getDiagnosis() {
@@ -26,7 +49,12 @@ export default class Diagnosis extends Component {
         }))
     }
 
-
+    updateDiagnosis(newSymptoms) {
+        let collection = JSON.parse(
+            list.getItem('collection')
+        ).concat(newSymptoms)
+        list.setItem('collection', JSON.stringify(collection))
+    }
 
     render() {
         return (
@@ -36,3 +64,11 @@ export default class Diagnosis extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+      store: state
+    }
+}
+  
+export default connect(mapStateToProps)(Diagnosis);
