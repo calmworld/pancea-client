@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import settings from '../settings.json'
 import { connect } from 'react-redux'
 import Conditions from './Conditions'
+import Question from './Question'
 
 const list = localStorage
 
