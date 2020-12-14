@@ -48,7 +48,26 @@ export default class GroupMultiple extends Component {
     render() {
         return (
             <div>
-                
+                <Fragment>
+                    <div className="form-group">
+                        {this.props.items.map((item) =>
+                            <div key={item.id} className="form-check">
+                                <input type="checkbox"
+                                    id={item.id}
+                                    name="group"
+                                    value="present"
+                                    onChange={this.checkSymptom}
+                                    className="form-check-input" />
+
+                                <label htmlFor={item.id}
+                                    className="form-check-label">
+                                    {item.name}
+                                </label>
+                            </div>
+                        )}
+                    </div>
+				<button className="btn btn-primary btn-lg btn-block next-btn" onClick={this.handleSymptoms}>Continue</button>
+			    </Fragment>
             </div>
         )
     }
