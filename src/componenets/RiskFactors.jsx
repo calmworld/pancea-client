@@ -62,7 +62,7 @@ class RiskFactors extends Component {
                     <div className="row">
                         <div className="col">
                             <p className="lead">
-                            Common Risk Factors</p>
+                            Select Possible Risk Factors</p>
 
                             {this.state.riskFactors.length > 0 &&
                             <Fragment>
