@@ -65,8 +65,12 @@ class Diagnosis extends Component {
                     {Object.keys(diagnosis).length > 0 
                         && diagnosis.question !== null &&
                         <Fragment>
-                        <Conditions conditions={diagnosis.conditions} />
-					    </Fragment>
+                            {!diagnosis.should_stop ? (
+                                <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
+                            ) : (
+                                <Conditions conditions={diagnosis.conditions} />
+                            )}
+                        </Fragment>
                     }
                 </Fragment>
             </div>
