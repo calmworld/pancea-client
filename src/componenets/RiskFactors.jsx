@@ -11,6 +11,7 @@ class RiskFactors extends Component {
             mapRiskFactors: [],
         }
         this.getRiskFactors = this.getRiskFactors.bind(this)
+        this.handleRiskChange = this.handleRiskChange.bind(this)
     }
 
     componentDidMount() {
