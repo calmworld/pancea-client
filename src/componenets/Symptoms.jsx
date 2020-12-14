@@ -85,7 +85,11 @@ class Symptoms extends Component {
                                 </div>
                             ))}
                         </div>
-                        <Link className="link link-lg" to={`/risk-factors`}>Risk Factors</Link>
+                        <br/>
+                        <br/>
+                        <button>
+                            <Link className="link link-lg" to={`/risk-factors`}>Risk Factors</Link>
+                        </button>
                     </Fragment>
                 )}
             </div>
