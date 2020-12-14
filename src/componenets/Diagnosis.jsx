@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import settings from '../settings.json'
 import { connect } from 'react-redux'
 
@@ -57,9 +57,14 @@ class Diagnosis extends Component {
     }
 
     render() {
+        let diagnosis = this.state.diagnosis
         return (
             <div>
-                
+                <Fragment>
+                    {Object.keys(diagnosis).length > 0 
+                        && diagnosis.question !== null
+                    }
+                </Fragment>
             </div>
         )
     }
