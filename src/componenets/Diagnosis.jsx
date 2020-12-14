@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import settings from '../settings.json'
 import { connect } from 'react-redux'
+import Conditions from './Conditions'
 
 const list = localStorage
 
@@ -62,7 +63,14 @@ class Diagnosis extends Component {
             <div>
                 <Fragment>
                     {Object.keys(diagnosis).length > 0 
-                        && diagnosis.question !== null
+                        && diagnosis.question !== null &&
+                        <Fragment>
+                            {!diagnosis.should_stop ? (
+                                <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
+                            ) : (
+                                <Conditions conditions={diagnosis.conditions} />
+                            )}
+                        </Fragment>
                     }
                 </Fragment>
             </div>
