@@ -20,7 +20,6 @@ class RiskFactors extends Component {
         this.props.onAddRiskFactorList(this.state.mapRiskFactors)
     }
 
-    // https://api.infermedica.com/v2/search?phrase=pain&sex=female&age.value=30&age.unit=year&max_results=5&type=risk_factor
 
     getRiskFactors() {
         fetch(`https://api.infermedica.com/v2/risk_factors`, {

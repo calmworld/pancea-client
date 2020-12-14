@@ -16,6 +16,10 @@ class Symptoms extends Component {
         }
     }
 
+    componenetDidMount() {
+        this.props.onAddSymp(this.state.mapSymptoms)
+    }
+    
     updateSymp = event => {
         let inputVal = event.target.value.substr(0, 20)
 
@@ -58,11 +62,6 @@ class Symptoms extends Component {
             }
           })
         });
-    }
-
-
-    componenetDidMount() {
-        this.props.onAddSymp(this.state.mapSymptoms)
     }
 
     render() {
