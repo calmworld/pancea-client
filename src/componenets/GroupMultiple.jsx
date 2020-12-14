@@ -4,7 +4,7 @@ export default class GroupMultiple extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            symptoms = []
+            symptoms: []
         }
         this.checkSymptom = this.checkSymptom.bind(this)
         this.handleSymptoms = this.handleSymptoms.bind(this)
