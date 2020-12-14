@@ -39,6 +39,7 @@ class Diagnosis extends Component {
     }
 
     getDiagnosis = async (evidence) => {
+        console.log(evidence)
         const resDiagnosis = await fetch(`https://api.infermedica.com/v2/diagnosis`, {
             method: 'POST',
             headers: settings.headers,
@@ -63,11 +64,12 @@ class Diagnosis extends Component {
 
     render() {
         let diagnosis = this.state.diagnosis
+        console.log(diagnosis)
         return (
             <div>
                 <Fragment>
                     {Object.keys(diagnosis).length > 0 
-                        && diagnosis.question !== null &&
+                        && diagnosis.question &&
                         <Fragment>
                             {!diagnosis.should_stop ? (
                                 <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
