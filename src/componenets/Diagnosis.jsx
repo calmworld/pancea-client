@@ -20,9 +20,10 @@ class Diagnosis extends Component {
 
     componentDidMount() {
         this.initializeDiagnosis()
+        this.getDiagnosis()
     }
 
-    initializeDiagnosis() {
+    initializeDiagnosis = async () => {
         let collection = this.props.store.symptomsReducer
         .concat(this.props.store.riskFactorsReducer)
         .map(item => {
@@ -34,21 +35,23 @@ class Diagnosis extends Component {
         } else {
             list.setItem('collection', JSON.stringify(collection))
         }
+        this.getDiagnosis(collection)
     }
 
-    getDiagnosis() {
-        fetch(`https://api.infermedica.com/v2/diagnosis`, {
+    getDiagnosis = async (evidence) => {
+        const resDiagnosis = await fetch(`https://api.infermedica.com/v2/diagnosis`, {
             method: 'POST',
             headers: settings.headers,
             body: JSON.stringify({
                 "sex": "male",
                 "age": 30,
-                "evidence": this.state.evidence
+                "evidence": evidence
             })
-        }).then(res => res.json())
-        .then(this.setState({
+        })
+        this.setState({
+            diagnosis: (await resDiagnosis.json()),
             evidence: this.state.evidence
-        }))
+        })
     }
 
     updateDiagnosis(newSymptoms) {
