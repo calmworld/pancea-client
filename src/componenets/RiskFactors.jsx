@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import commonRiskFactors from './commonRiskFactors.json'
 
@@ -71,7 +71,7 @@ class RiskFactors extends Component {
                                     </div>
                                 ))}
                                 </div>
-                                {/* <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link> */}
+                                <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link>
                             </Fragment>
                             }
                         </div>
