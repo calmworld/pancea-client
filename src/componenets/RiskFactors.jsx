@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import commonRiskFactors from './commonRiskFactors.json'
+import settings from '../settings.json'
 
 class RiskFactors extends Component {
     constructor(props) {
@@ -19,15 +20,24 @@ class RiskFactors extends Component {
         this.props.onAddRiskFactorList(this.state.mapRiskFactors)
     }
 
+    // https://api.infermedica.com/v2/search?phrase=pain&sex=female&age.value=30&age.unit=year&max_results=5&type=risk_factor
+
     getRiskFactors() {
-        this.setState({
-            mapRiskFactors: this.state.riskFactors.map(item => {
-                return {
-                    id: item.id,
-                    choice_id: 'present'
-                }
-            })
+        fetch(`https://api.infermedica.com/v2/risk_factors`, {
+            method: 'GET',
+            headers: settings.headers
+        }).then(data => {
+            return data.json()
         })
+        .then(this.setState({
+                mapRiskFactors: this.state.riskFactors.map(item => {
+                    return {
+                        id: item.id,
+                        choice_id: 'absent'
+                    }
+                })
+            })
+        )
     }
 
     handleRiskChange(event) {
@@ -52,7 +62,7 @@ class RiskFactors extends Component {
                     <div className="row">
                         <div className="col">
                             <p className="lead">
-                            Risk-factors(e.g. smoking, insect bite or head injury)</p>
+                            Common Risk Factors</p>
 
                             {this.state.riskFactors.length > 0 &&
                             <Fragment>
@@ -61,7 +71,7 @@ class RiskFactors extends Component {
                                     <div className="form-check" key={riskFactor.id}>
                                     <input type="checkbox"
                                         id={riskFactor.id}
-                                        onChange={this.changeRiskFactor}
+                                        onChange={this.handleRiskChange}
                                         className="form-check-input" />
 
                                     <label htmlFor={riskFactor.id}
