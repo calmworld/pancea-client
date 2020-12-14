@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import settings from '../settings.json'
 
@@ -84,6 +85,11 @@ class Symptoms extends Component {
                                 </div>
                             ))}
                         </div>
+                        <br/>
+                        <br/>
+                        <button>
+                            <Link className="link link-lg" to={`/risk-factors`}>Risk Factors</Link>
+                        </button>
                     </Fragment>
                 )}
             </div>
