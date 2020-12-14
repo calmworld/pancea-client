@@ -53,7 +53,6 @@ class RiskFactors extends Component {
         }))
     }
 
-
     render() {
         return (
             <div>
