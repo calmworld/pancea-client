@@ -68,7 +68,7 @@ class Symptoms extends Component {
         return (
             <div className="container">
                 <div className="form-group row">
-                    <label htmlfor="colFormLabel" className="col-form-label">What seems to be the problem?</label>
+                    <label htmlFor="colFormLabel" className="col-form-label">What seems to be the problem?</label>
                     <div className="col-sm-10">
                         <input type="text" className="form-control" id="colFormLabel" placeholder="upset stomach" onChange={this.updateSymp}></input>
                     </div>
