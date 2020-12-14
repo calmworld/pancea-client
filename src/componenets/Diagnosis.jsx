@@ -12,18 +12,17 @@ export default class Diagnosis extends Component {
     }
 
     getDiagnosis() {
-        const resDiagnosis = fetch(`https://api.infermedica.com/v2/diagnosis`, {
+        fetch(`https://api.infermedica.com/v2/diagnosis`, {
             method: 'POST',
             headers: settings.headers,
             body: JSON.stringify({
                 "sex": "male",
                 "age": 30,
-                "evidence": evidence
+                "evidence": this.state.evidence
             })
-        })
+        }).then(res => res.json())
         .then(this.setState({
-            diagnosis: resDiagnosis.json(),
-            evidence: evidence
+            evidence: this.state.evidence
         }))
     }
 
