@@ -2,13 +2,15 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import settings from '../settings.json'
 
+const TYPE = 'symptom'
+const REQUEST_TIMEOUT = 500
+var timeout = null
 
 class Symptoms extends Component {
     constructor(props) {
         super(props)
         this.state = {
             key: '',
-            age: 30,
             symptoms: [],
             mapSymptoms: []
         }
@@ -17,27 +19,20 @@ class Symptoms extends Component {
     }
 
     componenetDidMount() {
-        this.search()
+        this.updateSymptom()
         this.props.onAddSymp(this.state.mapSymptoms)
     }
 
+    updateSymptom = event => {
+        let input = event.target.value 
 
-    search(event) {
-        event.preventDefault()
-        fetch(`https://api.infermedica.com/v2/search?phrase=${this.state.key}&sex=male&age.value=${this.state.age}&age.unit=year&max_results=8&type=symptom`, {
-            method: 'GET',
-            headers: settings.headers
-        }).then(response => {
-            return response.json()
-        }).then(searchResult => {
-            this.setState({
-                symptoms: searchResult
-            })
-        })
-        
+        clearTimeout(timeout)
+
+        timeout = setTimeout(() => {
+            this.search(input, TYPE)
+        }, REQUEST_TIMEOUT)
     }
 
-    
     handleChange(event) {
         const {checked, id} = event.target;
         const choiceId = checked ? 'present' : 'absent';
@@ -50,6 +45,20 @@ class Symptoms extends Component {
             })
         })
     }
+
+    search(key, type) {
+        fetch(`https://api.infermedica.com/v2/search?phrase=${key}&sex=male&age.value=30&age.unit=year&max_results=8&type=${type}`, {
+            method: 'GET',
+            headers: settings.headers
+        }).then(response => {
+            return response.json()
+        }).then(searchResult => {
+            this.setState({
+                symptoms: searchResult
+            })
+        })
+        
+    }
     
 
     render() {
@@ -58,11 +67,13 @@ class Symptoms extends Component {
                 <div className="form-group row">
                     <label htmlFor="key" className="col-form-label">What seems to be the problem?</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="key" placeholder="upset stomach" onChange={this.search}></input>
-                    </div>
-                    <label htmlFor="age" className="col-form-label">Age</label>
-                    <div className="col-sm-10">
-                        <input type="number" className="form-control" id="age" placeholder="28" onChange={this.search}></input>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="key" 
+                            placeholder="upset stomach" 
+                            onChange={this.updateSymptom}
+                        />
                     </div>
                 </div>
                 {!this.state.symptoms.length ? (<h5>P.S. I can understand non-medical terms</h5>)
@@ -73,7 +84,12 @@ class Symptoms extends Component {
                                 this.state.symptoms.map(symptom => {
                                     return (
                                     <div className="form-check" key={symptom.id}>
-                                        <input type="checkbox" id={symptom.id} className="form-check-input" onChange={this.handleChange}></input>
+                                        <input 
+                                            type="checkbox" 
+                                            id={symptom.id} 
+                                            className="form-check-input" 
+                                            onChange={this.handleChange}
+                                        />
                                         <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label>
                                     </div>
                                     )
