@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import settings from '../settings.json'
+import { Link } from 'react-router-dom'
 
 const TYPE = 'symptom'
 const REQUEST_TIMEOUT = 500
@@ -96,6 +97,9 @@ class Symptoms extends Component {
                                 })
                             }
                         </div>
+                        <button>
+                            <Link className="link link-lg" to={`/risk-factors`}>Symptom assessment</Link>
+                        </button>
                     </Fragment>
                 )}
             </div>
