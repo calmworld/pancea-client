@@ -23,7 +23,15 @@ export default class Single extends Component {
     render() {
         return (
             <div>
-                
+                <Fragment>
+                    {this.props.items[0].choices.map((item) => 
+                        <button key={item.id} 
+                            id={this.props.items[0].id}
+                            value={item.id}
+                            onClick={this.handleSymptom}
+                            className="btn btn-primary btn-lg btn-block">{item.label}</button>
+                    )}
+                </Fragment>
             </div>
         )
     }
