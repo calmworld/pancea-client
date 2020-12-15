@@ -91,7 +91,10 @@ class Symptoms extends Component {
                                             className="form-check-input" 
                                             onChange={this.handleChange}
                                         />
-                                        <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label>
+                                        <label 
+                                            htmlFor={symptom.id} 
+                                            className="form-check-label">{symptom.label}
+                                            </label>
                                     </div>
                                     )
                                 })
