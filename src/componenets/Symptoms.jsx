@@ -35,16 +35,32 @@ class Symptoms extends Component {
     }
 
     handleChange(event) {
+        console.log(event)
         const {checked, id} = event.target;
+        console.log(this.state.mapSymptoms)
         const choiceId = checked ? 'present' : 'absent';
-        this.setState({
-            mapSymptoms: this.state.mapSymptoms.map(item => {
-                if (id === item.id) {
-                    item.choice_id = choiceId
-                }
-                return item
+        if (choiceId === 'present') {
+            this.setState({
+                mapSymptoms: [...this.state.mapSymptoms, id]
             })
-        })
+        } else {
+            var array = this.state.mapSymptoms
+            var index = array.indexOf(event.target.id)
+            if (index !== -1) {
+                array.splice(index, 1);
+                this.setState({mapSymptoms: array});
+  }
+        }
+        console.log(this.state.mapSymptoms)
+        // this.setState({
+        //     mapSymptoms: this.state.mapSymptoms.map(item => {
+        //         console.log(item.id)
+        //         if (id === item.id) {
+        //             item.choice_id = choiceId
+        //         }
+        //         return item
+        //     })
+        // })
     }
 
     search(key, type) {
@@ -119,6 +135,7 @@ const mapStateToProps = state => {
 const dispatchElement = dispatch => {
     return {
         onAddSymp: symptoms => {
+            console.log(symptoms)
             dispatch({type: 'ADD_SYMPTOMS', payload: symptoms})
         }
     }
