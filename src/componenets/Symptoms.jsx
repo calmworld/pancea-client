@@ -109,8 +109,9 @@ class Symptoms extends Component {
                                         />
                                         <label 
                                             htmlFor={symptom.id} 
-                                            className="form-check-label">{symptom.label}
-                                            </label>
+                                            className="form-check-label">
+                                                {symptom.label}
+                                        </label>
                                     </div>
                                     )
                                 })
