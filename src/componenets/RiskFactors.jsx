@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import commonRiskFactors from './commonRiskFactors.json'
 import settings from '../settings.json'
 
@@ -17,7 +16,6 @@ class RiskFactors extends Component {
 
     componentDidMount() {
         this.getRiskFactors()
-        this.props.onAddRiskFactorList(this.state.mapRiskFactors)
     }
 
 
@@ -79,7 +77,10 @@ class RiskFactors extends Component {
                                     </div>
                                 ))}
                                 </div>
-                                <button>
+                                <button onClick={() => {
+                                    console.log(this.state.mapRiskFactors)
+                                    this.props.updateRisks(this.state.mapRiskFactors)
+                                    }}>
                                     <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link>
                                 </button>
                             </Fragment>
@@ -93,18 +94,5 @@ class RiskFactors extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return {
-      store: state
-    }
-  }
   
-  const dispatchElement = dispatch => {
-    return {
-      onAddRiskFactorList: riskFactors => {
-        dispatch({ type: 'ADD_RISK_FACTORS', payload: riskFactors });
-      }
-    }
-  }
-  
-  export default connect(mapStateToProps, dispatchElement)(RiskFactors);
+export default RiskFactors;
