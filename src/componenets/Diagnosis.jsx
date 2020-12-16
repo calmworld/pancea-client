@@ -3,6 +3,7 @@ import settings from '../settings.json'
 import Conditions from './Conditions'
 import Question from './Question'
 
+const list = localStorage
 
 class Diagnosis extends Component {
     constructor(props) {

@@ -47,7 +47,7 @@ class Symptoms extends Component {
             if (index !== -1) {
                 array.splice(index, 1);
                 this.setState({mapSymptoms: array});
-  }
+            }
         }
         console.log(this.state.mapSymptoms)
         // this.setState({
