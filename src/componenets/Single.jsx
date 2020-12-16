@@ -7,9 +7,9 @@ export default class Single extends Component {
         this.handleSymptom = this.handleSymptom.bind(this)
     }
     
-    handleSymptom = (event) => {
+    handleSymptom = event => {
         let { id, value } = event.target
-        this.setState({[event.target.id]: event.target.value})
+        //this.setState({[event.target.id]: event.target.value})
 
         this.props.callbackQuestion([{
 			id: id,

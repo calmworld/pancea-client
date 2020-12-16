@@ -23,7 +23,8 @@ class Diagnosis extends Component {
             // symptom['initial'] = true
             return {
                 id: symptom,
-                choice_id: 'present'
+                choice_id: 'present',
+                initial: true
             }
         })
         this.getDiagnosis(evidence)
@@ -62,25 +63,38 @@ class Diagnosis extends Component {
         })
     }
 
+    // updateDiagnosis(newSymptoms) {
+    //     let collection = JSON.parse(
+    //         list.getItem('collection')
+    //     ).concat(newSymptoms)
+    //     list.setItem('collection', JSON.stringify(collection))
+    // }
+
     updateDiagnosis(newSymptoms) {
         let collection = JSON.parse(
             list.getItem('collection')
         ).concat(newSymptoms)
         list.setItem('collection', JSON.stringify(collection))
     }
+    
 
     render() {
         let diagnosis = [this.state.diagnosis]
         console.log(diagnosis)
+
+        //console.log(Object.keys(diagnosis[0]).length > 0)
+
+        console.log(Object.keys(diagnosis[0]).length > 0, diagnosis.should_stop !== undefined)
         return (
             <div>
                 <Fragment>
                     <ul>
-                        {Object.keys(diagnosis).length > 0 
-                            && diagnosis.question &&
+                        {Object.keys(diagnosis[0]).length > 0 
+                            && diagnosis[0].question !== null &&
+                            
                             <Fragment>
                                 <li>
-                                    {!diagnosis.should_stop ? (
+                                    {diagnosis.should_stop !== undefined ? (
                                         <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
                                     ) : (
                                         <Conditions conditions={diagnosis.conditions} />
@@ -97,3 +111,5 @@ class Diagnosis extends Component {
 
   
 export default Diagnosis;
+
+
