@@ -38,18 +38,33 @@ class RiskFactors extends Component {
     }
 
     handleRiskChange(event) {
+        console.log(event)
         const { checked, id } = event.target;
+        console.log(this.state.mapRiskFactors)
         const choiceId = checked ? 'present' : 'absent';
-
-        this.setState(({mapRiskFactors}) => ({
-            mapRiskFactors: mapRiskFactors.map(item => {
-                if (id === item.id) {
-                    item.choice_id = choiceId
-                }
-                return item;
+        if (choiceId === 'present') {
+            this.setState({
+                mapRiskFactors: [...this.state.mapRiskFactors, id]
             })
-        }))
+        } else {
+            var riskArr = this.state.mapRiskFactors
+            var index = riskArr.indexOf(event.target.id)
+            if (index !== -1) {
+                riskArr.splice(index, 1);
+                this.setState({mapRiskFactors: riskArr});
+            }
+        }
+        console.log(this.state.mapRiskFactors)
+        // this.setState(({mapRiskFactors}) => ({
+        //     mapRiskFactors: mapRiskFactors.map(item => {
+        //         if (id === item.id) {
+        //             item.choice_id = choiceId
+        //         }
+        //         return item;
+        //     })
+        // }))
     }
+
 
     render() {
         return (
