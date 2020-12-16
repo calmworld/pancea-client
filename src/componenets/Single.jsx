@@ -3,9 +3,7 @@ import React, { Component, Fragment } from 'react'
 export default class Single extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
+        
         this.handleSymptom = this.handleSymptom.bind(this)
     }
     

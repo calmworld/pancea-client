@@ -3,7 +3,7 @@ import React from 'react'
 const Conditions = ({conditions}) => (
     <div className="container">
         <h1>Conditions</h1>
-        <ul>
+        <ul className="list-group">
             <p>Probability</p>
             {
                 conditions.map((condition, index) => (

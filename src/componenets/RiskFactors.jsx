@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import commonRiskFactors from './commonRiskFactors.json'
-import settings from '../settings.json'
 
 class RiskFactors extends Component {
     constructor(props) {
@@ -20,21 +19,14 @@ class RiskFactors extends Component {
 
 
     getRiskFactors() {
-        fetch(`https://api.infermedica.com/v2/risk_factors`, {
-            method: 'GET',
-            headers: settings.headers
-        }).then(data => {
-            return data.json()
-        })
-        .then(this.setState({
-                mapRiskFactors: this.state.riskFactors.map(item => {
-                    return {
-                        id: item.id,
-                        choice_id: 'absent'
-                    }
-                })
+        this.setState({
+            mapRiskFactors: this.state.riskFactors.map(item => {
+                return {
+                    id: item.id,
+                    choice_id: 'present'
+                }
             })
-        )
+        })
     }
 
     handleRiskChange(event) {

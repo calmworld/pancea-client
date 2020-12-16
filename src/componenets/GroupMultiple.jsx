@@ -32,13 +32,13 @@ export default class GroupMultiple extends Component {
 
     handleSymptoms() {
         this.props.callbackQ(
-            this.state.symptomss
+            this.state.symptoms
         )
         this.setState({
             symptoms: this.props.items.map(item => {
                 return {
                     id: item.id,
-                    choice_id: 'absent'
+                    choice_id: 'present'
                 }
             })
         })
