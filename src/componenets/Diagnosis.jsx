@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import settings from '../settings.json'
-import { connect } from 'react-redux'
 import Conditions from './Conditions'
 import Question from './Question'
 
-const list = localStorage
 
 class Diagnosis extends Component {
     constructor(props) {
@@ -14,29 +12,35 @@ class Diagnosis extends Component {
             evidence: []
         }
         this.getDiagnosis = this.getDiagnosis.bind(this)
-        this.initializeDiagnosis = this.initializeDiagnosis.bind(this)
+        // this.initializeDiagnosis = this.initializeDiagnosis.bind(this)
         this.updateDiagnosis = this.updateDiagnosis.bind(this)
     }
 
     componentDidMount() {
-        this.initializeDiagnosis()
-        this.getDiagnosis()
+        // this.initializeDiagnosis()
+        let evidence = this.props.symptoms.map(symptom => {
+            return {
+                id: symptom,
+                choice_id: 'present'
+            }
+        })
+        this.getDiagnosis(evidence)
     }
 
-    initializeDiagnosis = async () => {
-        let collection = this.props.store.symptomsReducer
-        .concat(this.props.store.riskFactorsReducer)
-        .map(item => {
-            item['initial'] = true
-            return item
-        })
-        if (!collection.length) {
-            collection = JSON.parse(list.getItem('collection'))
-        } else {
-            list.setItem('collection', JSON.stringify(collection))
-        }
-        this.getDiagnosis(collection)
-    }
+    // initializeDiagnosis = async () => {
+    //     let collection = this.props.store.symptomsReducer
+    //     .concat(this.props.store.riskFactorsReducer)
+    //     .map(item => {
+    //         item['initial'] = true
+    //         return item
+    //     })
+    //     if (!collection.length) {
+    //         collection = JSON.parse(list.getItem('collection'))
+    //     } else {
+    //         list.setItem('collection', JSON.stringify(collection))
+    //     }
+    //     this.getDiagnosis(collection)
+    // }
 
     getDiagnosis = async (evidence) => {
         console.log(evidence)
@@ -49,6 +53,7 @@ class Diagnosis extends Component {
                 "evidence": evidence
             })
         })
+        console.log(resDiagnosis)
         this.setState({
             diagnosis: (await resDiagnosis.json()),
             evidence: this.state.evidence
@@ -84,10 +89,5 @@ class Diagnosis extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-      store: state
-    }
-}
   
-export default connect(mapStateToProps)(Diagnosis);
+export default Diagnosis;

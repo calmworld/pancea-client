@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import settings from '../settings.json'
 import { Link } from 'react-router-dom'
 
@@ -21,7 +20,6 @@ class Symptoms extends Component {
 
     componenetDidMount() {
         this.updateSymptom()
-        this.props.onAddSymp(this.state.mapSymptoms)
     }
 
     updateSymptom = event => {
@@ -117,7 +115,10 @@ class Symptoms extends Component {
                                 })
                             }
                         </div>
-                        <button>
+                        <button onClick={() => {
+                            console.log(this.state.mapSymptoms)
+                            this.props.updateSymptoms(this.state.mapSymptoms)
+                            }}>
                             <Link className="link link-lg" to={`/risk-factors`}>Symptom assessment</Link>
                         </button>
                     </Fragment>
@@ -127,19 +128,5 @@ class Symptoms extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        store: state
-    }
-}
 
-const dispatchElement = dispatch => {
-    return {
-        onAddSymp: symptoms => {
-            console.log(symptoms)
-            dispatch({type: 'ADD_SYMPTOMS', payload: symptoms})
-        }
-    }
-}
-
-export default connect(mapStateToProps, dispatchElement)(Symptoms);
+export default Symptoms;
