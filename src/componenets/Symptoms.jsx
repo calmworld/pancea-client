@@ -1,94 +1,124 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import settings from '../settings.json'
+import { Link } from 'react-router-dom'
 
-const TYPE = 'symptom';
-const REQUEST_TIMEOUT = 500;
-var timer = null;
+const TYPE = 'symptom'
+const REQUEST_TIMEOUT = 500
+var timeout = null
 
 class Symptoms extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            key: '',
             symptoms: [],
             mapSymptoms: []
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.search = this.search.bind(this)
     }
 
-    updateSymp = event => {
-        let inputVal = event.target.value.substr(0, 20)
+    componenetDidMount() {
+        this.updateSymptom()
+    }
 
-        clearTimeout(timer)
+    updateSymptom = event => {
+        let input = event.target.value 
 
-        timer = setTimeout(() => {
-            this.search(inputVal, TYPE)
+        clearTimeout(timeout)
+
+        timeout = setTimeout(() => {
+            this.search(input, TYPE)
         }, REQUEST_TIMEOUT)
     }
 
-    changeSymp = event => {
-        const {checked, id} = event.target;
-        const choiceId = checked ? 'present' : 'absent';
-        this.setState({
-            mapSymptoms: this.state.mapSymptoms.map(item => {
-                if (id === item.id) {
-                    item.choice_id = choiceId
-                }
-                return item
+    handleChange(event) {
+        console.log(event)
+        const {checked, id} = event.target
+        const choiceId = checked ? 'present' : 'absent'
+        if (choiceId === 'present') {
+            this.setState({
+                mapSymptoms: [...this.state.mapSymptoms, id]
             })
-        })
+        } else {
+            var array = this.state.mapSymptoms
+            var index = array.indexOf(event.target.id)
+            if (index !== -1) {
+                array.splice(index, 1);
+                this.setState({mapSymptoms: array});
+            }
+        }
+
+        // this.setState({
+        //     mapSymptoms: this.state.mapSymptoms.map(item => {
+        //         console.log(item.id)
+        //         if (id === item.id) {
+        //             item.choice_id = choiceId
+        //         }
+        //         return item
+        //     })
+        // })
     }
 
-    search = async (key, type) => {
-        const response = await fetch(`https://api.infermedica.com/v2/search?phrase=${key}` +
-        `&sex=male&max_results=5&type=${type}`, {
+    search(key, type) {
+        fetch(`https://api.infermedica.com/v2/search?phrase=${key}&sex=male&age.value=30&age.unit=year&max_results=8&type=${type}`, {
             method: 'GET',
             headers: settings.headers
+        }).then(response => {
+            return response.json()
+        }).then(searchResult => {
+            this.setState({
+                symptoms: searchResult
+            })
         })
-        this.mapDataToEvidence(await response.json())
+        
     }
-
-    mapDataToEvidence(searchResult) {
-        this.setState({
-          symptoms: searchResult,
-          mapSymptoms: searchResult.map(item => {
-            return {
-              id: item.id,
-              choice_id: 'absent'
-            }
-          })
-        });
-    }
-
-
-    componenetDidMount() {
-        this.props.onAddSymp(this.state.mapSymptoms)
-    }
+    
 
     render() {
         return (
             <div className="container">
                 <div className="form-group row">
-                    <label htmlFor="colFormLabel" className="col-form-label">What seems to be the problem?</label>
+                    <label htmlFor="key" className="col-form-label">What seems to be the problem?</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="colFormLabel" placeholder="upset stomach" onChange={this.updateSymp}></input>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="key" 
+                            placeholder="upset stomach" 
+                            onChange={this.updateSymptom}
+                        />
                     </div>
                 </div>
                 {!this.state.symptoms.length ? (<h5>P.S. I can understand non-medical terms</h5>)
                 : (
                     <Fragment>
                         <div className="form-group">
-                            {this.state.symptoms.map(symptom => (
-                                <div className="form-check" key={symptom.id}>
-                                    <input type="checkbox" id={symptom.id} className="form-check-input" onChange={this.changeSymp}></input>
-                                    <label htmlFor={symptom.id} className="form-check-label">{symptom.label}</label>
-                                </div>
-                            ))}
+                            {
+                                this.state.symptoms.map(symptom => {
+                                    return (
+                                    <div className="form-check" key={symptom.id}>
+                                        <input 
+                                            type="checkbox" 
+                                            id={symptom.id} 
+                                            className="form-check-input" 
+                                            onChange={this.handleChange}
+                                        />
+                                        <label 
+                                            htmlFor={symptom.id} 
+                                            className="form-check-label">
+                                                {symptom.label}
+                                        </label>
+                                    </div>
+                                    )
+                                })
+                            }
                         </div>
-                        <br/>
-                        <br/>
-                        <button>
-                            <Link className="link link-lg" to={`/risk-factors`}>Risk Factors</Link>
+                        <button onClick={() => {
+                            console.log(this.state.mapSymptoms)
+                            this.props.updateSymptoms(this.state.mapSymptoms)
+                            }}>
+                            <Link className="link link-lg" to={`/risk-factors`}>Symptom assessment</Link>
                         </button>
                     </Fragment>
                 )}
@@ -97,18 +127,5 @@ class Symptoms extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        store: state
-    }
-}
 
-const dispatchElement = dispatch => {
-    return {
-        onAddSymp: symptoms => {
-            dispatch({type: 'ADD_SYMPTOMS', payload: symptoms})
-        }
-    }
-}
-
-export default connect(mapStateToProps, dispatchElement)(Symptoms);
+export default Symptoms;

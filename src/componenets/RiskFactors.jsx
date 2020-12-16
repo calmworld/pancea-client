@@ -1,14 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import commonRiskFactors from './commonRiskFactors.json'
-import settings from '../settings.json'
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import commonFactors from './commonFactors.json'
 
 class RiskFactors extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            riskFactors: commonRiskFactors,
+            riskFactors: commonFactors,
             mapRiskFactors: [],
         }
         this.getRiskFactors = this.getRiskFactors.bind(this)
@@ -17,41 +15,45 @@ class RiskFactors extends Component {
 
     componentDidMount() {
         this.getRiskFactors()
-        this.props.onAddRiskFactorList(this.state.mapRiskFactors)
     }
 
-    // https://api.infermedica.com/v2/search?phrase=pain&sex=female&age.value=30&age.unit=year&max_results=5&type=risk_factor
 
     getRiskFactors() {
-        fetch(`https://api.infermedica.com/v2/risk_factors`, {
-            method: 'GET',
-            headers: settings.headers
-        }).then(data => {
-            return data.json()
-        })
-        .then(this.setState({
-                mapRiskFactors: this.state.riskFactors.map(item => {
-                    return {
-                        id: item.id,
-                        choice_id: 'absent'
-                    }
-                })
+        this.setState({
+            mapRiskFactors: this.state.riskFactors.map(item => {
+                return {
+                    id: item.id,
+                    choice_id: 'absent'
+                }
             })
-        )
+        })
     }
 
     handleRiskChange(event) {
-        const { checked, id } = event.target;
-        const choiceId = checked ? 'present' : 'absent';
-
-        this.setState(({mapRiskFactors}) => ({
-            mapRiskFactors: mapRiskFactors.map(item => {
-                if (id === item.id) {
-                    item.choice_id = choiceId
-                }
-                return item;
+        console.log(event)
+        const { checked, id } = event.target
+        const choiceId = checked ? 'present' : 'absent'
+        if (choiceId === 'present') {
+            this.setState({
+                mapRiskFactors: [...this.state.mapRiskFactors, id]
             })
-        }))
+        } else {
+            var riskArr = this.state.mapRiskFactors
+            var index = riskArr.indexOf(event.target.id)
+            if (index !== -1) {
+                riskArr.splice(index, 1);
+                this.setState({mapRiskFactors: riskArr})
+            }
+        }
+
+        // this.setState(({mapRiskFactors}) => ({
+        //     mapRiskFactors: mapRiskFactors.map(item => {
+        //         if (id === item.id) {
+        //             item.choice_id = choiceId
+        //         }
+        //         return item;
+        //     })
+        // }))
     }
 
 
@@ -81,7 +83,10 @@ class RiskFactors extends Component {
                                     </div>
                                 ))}
                                 </div>
-                                <button>
+                                <button onClick={() => {
+                                    console.log(this.state.mapRiskFactors)
+                                    this.props.updateRisks(this.state.mapRiskFactors)
+                                    }}>
                                     <Link className="link link-lg" to={`/diagnosis`}>Diagnose</Link>
                                 </button>
                             </Fragment>
@@ -95,18 +100,5 @@ class RiskFactors extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return {
-      store: state
-    }
-  }
   
-  const dispatchElement = dispatch => {
-    return {
-      onAddRiskFactorList: riskFactors => {
-        dispatch({ type: 'ADD_RISK_FACTORS', payload: riskFactors });
-      }
-    }
-  }
-  
-  export default connect(mapStateToProps, dispatchElement)(RiskFactors);
+export default RiskFactors;

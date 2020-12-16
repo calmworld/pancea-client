@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 export default class GroupMultiple extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            symptoms = []
+            symptoms: [] 
         }
         this.checkSymptom = this.checkSymptom.bind(this)
         this.handleSymptoms = this.handleSymptoms.bind(this)
@@ -32,13 +32,13 @@ export default class GroupMultiple extends Component {
 
     handleSymptoms() {
         this.props.callbackQ(
-            this.state.symptomss
+            this.state.symptoms
         )
         this.setState({
             symptoms: this.props.items.map(item => {
                 return {
                     id: item.id,
-                    choice_id: 'absent'
+                    choice_id: 'present'
                 }
             })
         })
