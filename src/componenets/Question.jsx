@@ -19,24 +19,24 @@ export default class Question extends Component {
 
     render() {
         let question = [this.props.question]
-        console.log(question)
+        console.log(question[0])
         let questionType
-        switch(question.type) {
+        switch(question[0].type) {
 			case 'single':
-				questionType = <Single items={question.items} callbackQuestion={this.handleQuestion} />;
+				questionType = <Single items={question[0].items} callbackQuestion={this.handleQuestion} />;
 				break;
 			case 'group_single':
-				questionType = <GroupSingle items={question.items} callbackQuestion={this.handleQuestion} />;
+				questionType = <GroupSingle items={question[0].items} callbackQuestion={this.handleQuestion} />;
 				break;
 			case 'group_multiple':
-				questionType = <GroupMultiple items={question.items} callbackQuestion={this.handleQuestion} />;
+				questionType = <GroupMultiple items={question[0].items} callbackQuestion={this.handleQuestion} />;
 				break;
 			default:
 		}
         return (
             <div className="container">
                 <h4>Question</h4>
-                <p className="lead">{question}</p>
+                <p className="lead">{question[0].text}</p>
 				{questionType}          
             </div>
         )

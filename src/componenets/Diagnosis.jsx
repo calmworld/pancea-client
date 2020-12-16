@@ -82,7 +82,7 @@ class Diagnosis extends Component {
         let diagnosis = [this.state.diagnosis]
         console.log(diagnosis)
 
-        //console.log(Object.keys(diagnosis[0]).length > 0)
+        console.log(diagnosis.should_stop)
 
         console.log(Object.keys(diagnosis[0]).length > 0, diagnosis.should_stop !== undefined)
         return (
@@ -94,10 +94,10 @@ class Diagnosis extends Component {
                             
                             <Fragment>
                                 <li>
-                                    {diagnosis.should_stop !== undefined ? (
-                                        <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
+                                    {diagnosis.should_stop === undefined ? (
+                                        <Question question={diagnosis[0].question} callbackDiagnosis={this.updateDiagnosis} />
                                     ) : (
-                                        <Conditions conditions={diagnosis.conditions} />
+                                        <Conditions conditions={diagnosis[0].conditions} />
                                     )}
                                 </li>
                             </Fragment>

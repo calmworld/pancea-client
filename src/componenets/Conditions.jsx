@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Conditions = ([conditions]) => (
+const Conditions = ({conditions}) => (
     <div className="container">
         <h1>Conditions</h1>
         <ul className="list-group">

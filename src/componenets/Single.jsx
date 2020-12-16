@@ -19,6 +19,7 @@ export default class Single extends Component {
 
 
     render() {
+        console.log(this.props.items)
         return (
             <div>
                 <Fragment>
