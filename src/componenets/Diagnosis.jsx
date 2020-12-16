@@ -20,6 +20,7 @@ class Diagnosis extends Component {
     componentDidMount() {
         // this.initializeDiagnosis()
         let evidence = this.props.symptoms.map(symptom => {
+            // symptom['initial'] = true
             return {
                 id: symptom,
                 choice_id: 'present'

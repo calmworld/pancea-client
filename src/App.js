@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Header from './componenets/Header'
-// import reducer from './reducers'
 import Home from './componenets/Home'
 import Symptoms from './componenets/Symptoms'
 import Welcome from './componenets/Welcome'
