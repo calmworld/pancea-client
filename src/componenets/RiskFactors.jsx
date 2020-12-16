@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import commonRiskFactors from './commonRiskFactors.json'
+import commonFactors from './commonFactors.json'
 
 class RiskFactors extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            riskFactors: commonRiskFactors,
+            riskFactors: commonFactors,
             mapRiskFactors: [],
         }
         this.getRiskFactors = this.getRiskFactors.bind(this)
@@ -23,7 +23,7 @@ class RiskFactors extends Component {
             mapRiskFactors: this.state.riskFactors.map(item => {
                 return {
                     id: item.id,
-                    choice_id: 'present'
+                    choice_id: 'absent'
                 }
             })
         })
@@ -31,9 +31,8 @@ class RiskFactors extends Component {
 
     handleRiskChange(event) {
         console.log(event)
-        const { checked, id } = event.target;
-        console.log(this.state.mapRiskFactors)
-        const choiceId = checked ? 'present' : 'absent';
+        const { checked, id } = event.target
+        const choiceId = checked ? 'present' : 'absent'
         if (choiceId === 'present') {
             this.setState({
                 mapRiskFactors: [...this.state.mapRiskFactors, id]
@@ -43,10 +42,10 @@ class RiskFactors extends Component {
             var index = riskArr.indexOf(event.target.id)
             if (index !== -1) {
                 riskArr.splice(index, 1);
-                this.setState({mapRiskFactors: riskArr});
+                this.setState({mapRiskFactors: riskArr})
             }
         }
-        console.log(this.state.mapRiskFactors)
+
         // this.setState(({mapRiskFactors}) => ({
         //     mapRiskFactors: mapRiskFactors.map(item => {
         //         if (id === item.id) {

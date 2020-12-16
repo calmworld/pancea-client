@@ -18,7 +18,7 @@ export default class Question extends Component {
     }
 
     render() {
-        let question = this.props.question
+        let question = [this.props.question]
         console.log(question)
         let questionType
         switch(question.type) {

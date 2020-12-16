@@ -11,7 +11,7 @@ export default class Single extends Component {
         let { id, value } = event.target
         this.setState({[event.target.id]: event.target.value})
 
-        this.props.callBackQ([{
+        this.props.callbackQuestion([{
 			id: id,
 			choice_id: value
 		}])

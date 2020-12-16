@@ -70,21 +70,25 @@ class Diagnosis extends Component {
     }
 
     render() {
-        let diagnosis = this.state.diagnosis
+        let diagnosis = [this.state.diagnosis]
         console.log(diagnosis)
         return (
             <div>
                 <Fragment>
-                    {Object.keys(diagnosis).length > 0 
-                        && diagnosis.question &&
-                        <Fragment>
-                            {!diagnosis.should_stop ? (
-                                <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
-                            ) : (
-                                <Conditions conditions={diagnosis.conditions} />
-                            )}
-                        </Fragment>
-                    }
+                    <ul>
+                        {Object.keys(diagnosis).length > 0 
+                            && diagnosis.question &&
+                            <Fragment>
+                                <li>
+                                    {!diagnosis.should_stop ? (
+                                        <Question question={diagnosis.question} callbackDiagnosis={this.updateDiagnosis} />
+                                    ) : (
+                                        <Conditions conditions={diagnosis.conditions} />
+                                    )}
+                                </li>
+                            </Fragment>
+                        }
+                    </ul>
                 </Fragment>
             </div>
         )

@@ -34,9 +34,8 @@ class Symptoms extends Component {
 
     handleChange(event) {
         console.log(event)
-        const {checked, id} = event.target;
-        console.log(this.state.mapSymptoms)
-        const choiceId = checked ? 'present' : 'absent';
+        const {checked, id} = event.target
+        const choiceId = checked ? 'present' : 'absent'
         if (choiceId === 'present') {
             this.setState({
                 mapSymptoms: [...this.state.mapSymptoms, id]
@@ -49,7 +48,7 @@ class Symptoms extends Component {
                 this.setState({mapSymptoms: array});
             }
         }
-        console.log(this.state.mapSymptoms)
+
         // this.setState({
         //     mapSymptoms: this.state.mapSymptoms.map(item => {
         //         console.log(item.id)
