@@ -12,10 +12,12 @@ class App extends Component {
     super()
     this.state = {
       symptoms: [],
-      riskFactors: []
+      riskFactors: [],
+      // diagnosis: []
     }
     this.updateSymptoms = this.updateSymptoms.bind(this)
     this.updateRisks = this.updateRisks.bind(this)
+    // this.updateDiagnosis = this.updateDiagnosis.bind(this)
   }
 
   updateSymptoms(newSymptoms) {
@@ -32,6 +34,13 @@ class App extends Component {
     })
   }
 
+  // updateDiagnosis(newDiagnosis) {
+  //   this.setState({
+  //     diagnosis: [...newDiagnosis]
+  //   })
+  // }
+
+
   render() {
     return (
       <div>
@@ -44,6 +53,7 @@ class App extends Component {
                 <Route exact path="/symptoms" render={() => <Symptoms updateSymptoms={ this.updateSymptoms } /> } />
                 <Route exact path="/risk-factors" render={() => <RiskFactors updateRisks={ this.updateRisks } /> } />
                 <Route exact path="/diagnosis" render={() => <Diagnosis symptoms={ this.state.symptoms } /> } />
+                {/* <Route exact path="/diagnosis" render={() => <Diagnosis updateDiagnosis={ this.updateDiagnosis } /> } /> */}
               </Switch>
             </div>
         </Router>

@@ -13,14 +13,11 @@ class Diagnosis extends Component {
             evidence: []
         }
         this.getDiagnosis = this.getDiagnosis.bind(this)
-        // this.initializeDiagnosis = this.initializeDiagnosis.bind(this)
         this.updateDiagnosis = this.updateDiagnosis.bind(this)
     }
 
     componentDidMount() {
-        // this.initializeDiagnosis()
         let evidence = this.props.symptoms.map(symptom => {
-            // symptom['initial'] = true
             return {
                 id: symptom,
                 choice_id: 'present',
@@ -29,21 +26,6 @@ class Diagnosis extends Component {
         })
         this.getDiagnosis(evidence)
     }
-
-    // initializeDiagnosis = async () => {
-    //     let collection = this.props.store.symptomsReducer
-    //     .concat(this.props.store.riskFactorsReducer)
-    //     .map(item => {
-    //         item['initial'] = true
-    //         return item
-    //     })
-    //     if (!collection.length) {
-    //         collection = JSON.parse(list.getItem('collection'))
-    //     } else {
-    //         list.setItem('collection', JSON.stringify(collection))
-    //     }
-    //     this.getDiagnosis(collection)
-    // }
 
     getDiagnosis = async (evidence) => {
         console.log(evidence)
@@ -63,13 +45,6 @@ class Diagnosis extends Component {
         })
     }
 
-    // updateDiagnosis(newSymptoms) {
-    //     let collection = JSON.parse(
-    //         list.getItem('collection')
-    //     ).concat(newSymptoms)
-    //     list.setItem('collection', JSON.stringify(collection))
-    // }
-
     updateDiagnosis(newSymptoms) {
         let collection = JSON.parse(
             list.getItem('collection')
@@ -77,6 +52,10 @@ class Diagnosis extends Component {
         list.setItem('collection', JSON.stringify(collection))
     }
     
+    // onClick={() => {
+    //     console.log(this.state.mapRiskFactors)
+    //     this.props.updateRisks(this.state.mapRiskFactors)
+    //     }}
 
     render() {
         let diagnosis = [this.state.diagnosis]
