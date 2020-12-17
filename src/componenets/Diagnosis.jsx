@@ -64,8 +64,8 @@ class Diagnosis extends Component {
     render() {
         let diagnosis = [this.state.diagnosis]
         console.log(diagnosis)
-
-        console.log(diagnosis.should_stop)
+        console.log(this.state.diagnosis.should_stop)
+        //console.log(diagnosis.should_stop)
 
         console.log(Object.keys(diagnosis[0]).length > 0, !diagnosis.should_stop)
         return (
@@ -76,7 +76,7 @@ class Diagnosis extends Component {
                             && diagnosis[0].question &&
                             <Fragment>
                                 <li>
-                                    {!diagnosis.should_stop ? (
+                                    {!this.state.diagnosis.should_stop ? (
                                         <Question question={diagnosis[0].question} callbackDiagnosis={this.addQuestion} />
                                     ) : (
                                         <Conditions conditions={diagnosis[0].conditions} />
