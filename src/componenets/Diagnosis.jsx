@@ -3,39 +3,40 @@ import settings from '../settings.json'
 import Conditions from './Conditions'
 import Question from './Question'
 
-const list = localStorage
+//const list = localStorage
 
 class Diagnosis extends Component {
     constructor(props) {
         super(props)
         this.state = {
             diagnosis: {},
-            evidence: []
+            evidence: [],
+            questions: []
         }
         this.getDiagnosis = this.getDiagnosis.bind(this)
-        this.updateDiagnosis = this.updateDiagnosis.bind(this)
+        this.addQuestion = this.addQuestion.bind(this)
     }
 
     componentDidMount() {
-        let evidence = this.props.symptoms.map(symptom => {
-            return {
-                id: symptom,
-                choice_id: 'present',
-                initial: true
-            }
-        })
-        this.getDiagnosis(evidence)
+        this.setState({
+            evidence: [...this.props.symptoms.map(symptom => {
+                return {
+                    id: symptom,
+                    choice_id: 'present',
+                    initial: true
+                }
+            })]
+        }, () => this.getDiagnosis())
     }
 
-    getDiagnosis = async (evidence) => {
-        console.log(evidence)
+    getDiagnosis = async () => {
         const resDiagnosis = await fetch(`https://api.infermedica.com/v2/diagnosis`, {
             method: 'POST',
             headers: settings.headers,
             body: JSON.stringify({
                 "sex": "male",
                 "age": 30,
-                "evidence": evidence
+                "evidence": [...this.state.evidence, ...this.state.questions]
             })
         })
         console.log(resDiagnosis)
@@ -45,17 +46,20 @@ class Diagnosis extends Component {
         })
     }
 
-    updateDiagnosis(newSymptoms) {
-        let collection = JSON.parse(
-            list.getItem('collection')
-        ).concat(newSymptoms)
-        list.setItem('collection', JSON.stringify(collection))
+    // updateDiagnosis(newSymptoms) {
+    //     let collection = JSON.parse(
+    //         list.getItem('collection')
+    //     ).concat(newSymptoms)
+    //     list.setItem('collection', JSON.stringify(collection))
+    // }
+    
+    addQuestion(answer) {
+        console.log(this.state.questions)
+        this.setState({
+            questions: [...this.state.questions, ...answer]
+        }, () => {this.getDiagnosis()})
     }
     
-    // onClick={() => {
-    //     console.log(this.state.mapRiskFactors)
-    //     this.props.updateRisks(this.state.mapRiskFactors)
-    //     }}
 
     render() {
         let diagnosis = [this.state.diagnosis]
@@ -63,18 +67,17 @@ class Diagnosis extends Component {
 
         console.log(diagnosis.should_stop)
 
-        console.log(Object.keys(diagnosis[0]).length > 0, diagnosis.should_stop !== undefined)
+        console.log(Object.keys(diagnosis[0]).length > 0, !diagnosis.should_stop)
         return (
             <div>
                 <Fragment>
                     <ul>
                         {Object.keys(diagnosis[0]).length > 0 
-                            && diagnosis[0].question !== null &&
-                            
+                            && diagnosis[0].question &&
                             <Fragment>
                                 <li>
-                                    {diagnosis.should_stop === undefined ? (
-                                        <Question question={diagnosis[0].question} callbackDiagnosis={this.updateDiagnosis} />
+                                    {!diagnosis.should_stop ? (
+                                        <Question question={diagnosis[0].question} callbackDiagnosis={this.addQuestion} />
                                     ) : (
                                         <Conditions conditions={diagnosis[0].conditions} />
                                     )}

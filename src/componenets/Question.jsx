@@ -23,13 +23,13 @@ export default class Question extends Component {
         let questionType
         switch(question[0].type) {
 			case 'single':
-				questionType = <Single items={question[0].items} callbackQuestion={this.handleQuestion} />;
+				questionType = <Single items={question[0].items} callbackQuestion={this.props.callbackDiagnosis} />;
 				break;
 			case 'group_single':
-				questionType = <GroupSingle items={question[0].items} callbackQuestion={this.handleQuestion} />;
+				questionType = <GroupSingle items={question[0].items} callbackQuestion={this.props.callbackDiagnosis} />;
 				break;
 			case 'group_multiple':
-				questionType = <GroupMultiple items={question[0].items} callbackQuestion={this.handleQuestion} />;
+				questionType = <GroupMultiple items={question[0].items} callbackQuestion={this.props.callbackDiagnosis} />;
 				break;
 			default:
 		}
