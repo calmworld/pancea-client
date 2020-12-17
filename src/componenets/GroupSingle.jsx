@@ -9,7 +9,7 @@ export default class GroupSingle extends Component {
     
     handleSymptom = (event) => {
         let { id, value } = event.target 
-        this.setState({[event.target.id]: event.target.value})
+        // this.setState({[event.target.id]: event.target.value})
 
         this.props.callBackQuestion([{
 			id: id,
@@ -22,7 +22,7 @@ export default class GroupSingle extends Component {
             <div>
                 <Fragment>
                 {
-                    this.props.items.map((item) =>
+                    this.props.items[0].map((item) =>
                         <div className="form-check" key={item.id}>
                             <input type="radio"
                                 id={item.id}
