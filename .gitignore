@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-settings.js
 
 # testing
 /coverage
@@ -26,4 +25,4 @@ yarn-error.log*
 
 
 # files
-settings.json
+
