@@ -33,3 +33,12 @@ code {
   text-decoration: none;
   color: black;
 }
+
+.table{
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  border-top: 5px solid black;
+}

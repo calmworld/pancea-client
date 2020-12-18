@@ -7,8 +7,7 @@ export default class Drugs extends Component {
     constructor() {
         super()
         this.state = {
-            drugs: [],
-            ifOfDrugToEdit: -1
+            drugs: []
         }
         this.getDrugs = this.getDrugs.bind(this)
         this.handleAddDrug = this.handleAddDrug.bind(this)
@@ -53,17 +52,20 @@ export default class Drugs extends Component {
         return (
             <div>
                 <h3>Medications</h3>
-                <DrugForm handleAddDrug={this.handleAddDrug} />
-                <table>
+                <DrugForm handleAddDrug={this.handleAddDrug} /><br />
+                <table className="table">
                     <tbody>
                         {
                         this.state.drugs.map(drug => {
                             return (
                             <tr>
-                                <td key={drug._id}
-                                    className={drug.overCounter ? 'overCounter' : null }
-                                > 
-                                {drug.name} -|- {drug.takenFor}
+                                <th><h3>Name </h3></th>
+                                <td key={drug._id}>
+                                {drug.name}
+                                </td>
+                                <th><h3>Taken For </h3></th>
+                                <td>
+                                {drug.takenFor}
                                 </td>
                                 <td onClick={ () => this.deleteDrug(drug._id) }>X</td>
                             </tr>

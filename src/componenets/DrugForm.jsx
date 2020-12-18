@@ -21,7 +21,10 @@ export default class NewForm extends Component {
         event.preventDefault()
         fetch(baseURL + '/drugs', {
             method: 'POST',
-            body: JSON.stringify({name: this.state.name}),
+            body: JSON.stringify({
+                name: this.state.name,
+                takenFor: this.state.takenFor
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -29,7 +32,8 @@ export default class NewForm extends Component {
         .then(data => {
             this.props.handleAddDrug(data)
             this.setState({
-                name: ''
+                name: '',
+                takenFor: ''
             })
         })
     }
@@ -44,7 +48,7 @@ export default class NewForm extends Component {
                     name='name' 
                     onChange={this.handleChange} 
                     value={this.state.name}
-                    placeHolder='antihistamines' 
+                    placeholder='antihistamines' 
                 /><br />
                 <label htmlFor='takenFor'>Taken For </label>
                 <input 
@@ -53,7 +57,7 @@ export default class NewForm extends Component {
                     name='takenFor' 
                     onChange={this.handleChange} 
                     value={this.state.takenFor}
-                    placeHolder='Heart Pain' 
+                    placeholder='Heart Pain' 
                 /><br />
                 <input type='submit' value='Add Medication'/>
             </form>
