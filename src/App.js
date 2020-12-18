@@ -9,7 +9,6 @@ import Diagnosis from './componenets/Diagnosis'
 import Drugs from './componenets/Drugs'
 
 
-// const baseURL = 'http://localhost:4000'
 
 class App extends Component {
   constructor() {
