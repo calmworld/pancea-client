@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 const baseURL = 'https://pancea-backend.herokuapp.com'
+// const baseURL = 'http://localhost:4000'
 
 export default class NewForm extends Component {
     constructor(props) {

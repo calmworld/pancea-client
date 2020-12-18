@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DrugForm from './DrugForm'
 
 const baseURL = 'https://pancea-backend.herokuapp.com'
+// const baseURL = 'http://localhost:4000'
 
 export default class Drugs extends Component {
     constructor() {
