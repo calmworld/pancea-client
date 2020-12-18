@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import DrugForm from './DrugForm'
 
-const baseURL = 'http://localhost:4000'
+const baseURL = 'https://pancea-backend.herokuapp.com/'
 
 export default class Drugs extends Component {
     constructor() {
         super()
         this.state = {
-            drugs: [],
-            ifOfDrugToEdit: -1
+            drugs: []
         }
         this.getDrugs = this.getDrugs.bind(this)
         this.handleAddDrug = this.handleAddDrug.bind(this)
