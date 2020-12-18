@@ -9,7 +9,9 @@ const Conditions = ({conditions}) => (
                 conditions.map((condition, index) => (
                     <li key={condition.id}
                         className={`${0 !== index ? '' : 'active'}`}>
-                        {condition.name}
+                        <h4>Condition: </h4>
+                        {condition.name} || 
+                        <h4>Probability: </h4>
                         <span>{condition.probability}</span>
                     </li>
 				))
