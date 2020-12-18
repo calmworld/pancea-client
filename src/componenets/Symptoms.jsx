@@ -48,16 +48,7 @@ class Symptoms extends Component {
                 this.setState({mapSymptoms: array});
             }
         }
-
-        // this.setState({
-        //     mapSymptoms: this.state.mapSymptoms.map(item => {
-        //         console.log(item.id)
-        //         if (id === item.id) {
-        //             item.choice_id = choiceId
-        //         }
-        //         return item
-        //     })
-        // })
+        console.log(this.state.mapSymptoms)
     }
 
     search(key, type) {

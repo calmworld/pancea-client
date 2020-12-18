@@ -9,9 +9,9 @@ export default class GroupSingle extends Component {
     
     handleSymptom = (event) => {
         let { id, value } = event.target 
-        this.setState({[event.target.id]: event.target.value})
+        // this.setState({[event.target.id]: event.target.value})
 
-        this.props.callBackQ([{
+        this.props.callbackQuestion([{
 			id: id,
 			choice_id: value
 		}])

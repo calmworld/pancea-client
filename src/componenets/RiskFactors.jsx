@@ -44,16 +44,8 @@ class RiskFactors extends Component {
                 riskArr.splice(index, 1);
                 this.setState({mapRiskFactors: riskArr})
             }
+            console.log(this.state.mapRiskFactors)
         }
-
-        // this.setState(({mapRiskFactors}) => ({
-        //     mapRiskFactors: mapRiskFactors.map(item => {
-        //         if (id === item.id) {
-        //             item.choice_id = choiceId
-        //         }
-        //         return item;
-        //     })
-        // }))
     }
 
 

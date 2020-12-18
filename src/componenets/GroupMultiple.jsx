@@ -7,7 +7,7 @@ export default class GroupMultiple extends Component {
             symptoms: [] 
         }
         this.checkSymptom = this.checkSymptom.bind(this)
-        this.handleSymptoms = this.handleSymptoms.bind(this)
+        this.handleSymptom = this.handleSymptom.bind(this)
     }
 
     componenetDidMount() {
@@ -30,8 +30,8 @@ export default class GroupMultiple extends Component {
         }))
     }
 
-    handleSymptoms() {
-        this.props.callbackQ(
+    handleSymptom() {
+        this.props.callbackQuestion(
             this.state.symptoms
         )
         this.setState({
@@ -66,7 +66,7 @@ export default class GroupMultiple extends Component {
                             </div>
                         )}
                     </div>
-				<button className="btn btn-primary btn-lg btn-block next-btn" onClick={this.handleSymptoms}>Continue</button>
+				<button className="btn btn-primary btn-lg btn-block next-btn" onClick={this.handleSymptom}>Continue</button>
 			    </Fragment>
             </div>
         )

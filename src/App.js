@@ -6,16 +6,22 @@ import Symptoms from './componenets/Symptoms'
 import Welcome from './componenets/Welcome'
 import RiskFactors from './componenets/RiskFactors'
 import Diagnosis from './componenets/Diagnosis'
+import Drugs from './componenets/Drugs'
+
+
+const baseURL = 'http://localhost:4000'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       symptoms: [],
-      riskFactors: []
+      riskFactors: [],
+      diagnosis: []
     }
     this.updateSymptoms = this.updateSymptoms.bind(this)
     this.updateRisks = this.updateRisks.bind(this)
+    this.updateDiagnosis = this.updateDiagnosis.bind(this)
   }
 
   updateSymptoms(newSymptoms) {
@@ -32,6 +38,12 @@ class App extends Component {
     })
   }
 
+  updateDiagnosis(newDiagnosis) {
+    this.setState({
+      diagnosis: [...newDiagnosis]
+    })
+  }
+
   render() {
     return (
       <div>
@@ -43,7 +55,8 @@ class App extends Component {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/symptoms" render={() => <Symptoms updateSymptoms={ this.updateSymptoms } /> } />
                 <Route exact path="/risk-factors" render={() => <RiskFactors updateRisks={ this.updateRisks } /> } />
-                <Route exact path="/diagnosis" render={() => <Diagnosis symptoms={ this.state.symptoms } /> } />
+                <Route exact path="/diagnosis" render={() => <Diagnosis symptoms = {this.state.symptoms} updateDiagnosis={ this.updateDiagnosis } /> } />
+                <Route exact path="/drugs" component={Drugs} />
               </Switch>
             </div>
         </Router>
