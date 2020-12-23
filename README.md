@@ -1,4 +1,15 @@
-# Deployed App on heroku
+# Pancea
+Have you been feeling under the weather? Would you like to know what your body is telling you? 
+Pancea is an anonymous symptom checker app built using a physician maintained medical API. 
+
+# Users can use the app anonymously without giving any personal information
+# A user can enter multiple symptoms and then get prompted by the app to answer multiple questions regarding the entered symptoms
+# The user will then get a set of diagnoses ordered from high to low probability 
+
+# Technology Used 
+Express, React, Mongoose, Bootstrap, Node.js
+
+# Try App Here
 https://pancea.herokuapp.com/
 
 # Getting Started with Create React App
