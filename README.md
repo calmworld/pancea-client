@@ -6,11 +6,11 @@ Pancea is an anonymous symptom checker app built using a physician maintained me
 - A user can enter multiple symptoms and then get prompted by the app to answer multiple questions regarding the entered symptoms
 - The user will then get a set of diagnoses ordered from high to low probability 
 
-# Technology Used 
-Express, React, Mongoose, Bootstrap, Node.js
+# Technologies Used 
+Express, React, Mongoose, Bootstrap, Node.js, AWS Amplify.
 
 # Try App Here
-https://pancea.herokuapp.com/
+https://main.dfzzr93qmqe2b.amplifyapp.com/
 
 # Getting Started with Create React App
 
