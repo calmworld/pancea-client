@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import Drugs from './Drugs'
 
 
 export default class Home extends Component {
@@ -21,9 +20,6 @@ export default class Home extends Component {
                 <p className="lead">I can help you find a diagnosis and connect you to a specialist</p>
                 <button>
                     <Link className="link link-lg" to={`/symptoms`}>Evaluate My Symptoms</Link>
-                </button>
-                <button>
-                    <Link className="link link-lg" to={`/drugs`}>Drugs</Link>
                 </button>
             </div>
         )

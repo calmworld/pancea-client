@@ -6,7 +6,6 @@ import Symptoms from './componenets/Symptoms'
 import Welcome from './componenets/Welcome'
 import RiskFactors from './componenets/RiskFactors'
 import Diagnosis from './componenets/Diagnosis'
-import Drugs from './componenets/Drugs'
 
 
 
@@ -55,7 +54,6 @@ class App extends Component {
                 <Route exact path="/symptoms" render={() => <Symptoms updateSymptoms={ this.updateSymptoms } /> } />
                 <Route exact path="/risk-factors" render={() => <RiskFactors updateRisks={ this.updateRisks } /> } />
                 <Route exact path="/diagnosis" render={() => <Diagnosis symptoms = {this.state.symptoms} updateDiagnosis={ this.updateDiagnosis } /> } />
-                <Route exact path="/drugs" component={Drugs} />
               </Switch>
             </div>
         </Router>
